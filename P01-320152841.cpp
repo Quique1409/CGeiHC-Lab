@@ -3,11 +3,17 @@
 #include <glew.h>
 #include <glfw3.h>
 #include <Windows.h>
+//para el cambio de color random en el fondo de pantalla
+#include <cstdlib>
+#include <ctime>
+
 //Dimensiones de la ventana
 const int WIDTH = 800, HEIGHT = 800;
 GLuint VAO, VBO, shader;
+
+//Variables para los colores rgb
 float ROJO = 0.0f, VERDE = 0.0f, AZUL = 0.0f;
-int color = 0;
+double last_time = 0.0;
 //LENGUAJE DE SHADER (SOMBRAS) GLSL
 //Vertex Shader
 //recibir color, salida Vcolor
@@ -51,6 +57,7 @@ void CrearTriangulo()
 		0.2f, 0.3f,0.0f,
 		0.4f,0.3f,0.0f,
 		0.3f,0.4f,0.0f,
+
 	};
 	glGenVertexArrays(1, &VAO); //generar 1 VAO
 	glBindVertexArray(VAO);//asignar VAO
@@ -178,6 +185,15 @@ int main()
 	CrearTriangulo();
 	CompileShaders();
 
+	srand((unsigned int)time(NULL));
+
+	//Escojer valores random entre 0 y 1 para la combinación rgb
+	ROJO = (float)rand() / RAND_MAX;
+	VERDE = (float)rand() / RAND_MAX;
+	AZUL = (float)rand() / RAND_MAX;
+
+	last_time = glfwGetTime();
+
 
 	//Loop mientras no se cierra la ventana
 	while (!glfwWindowShouldClose(mainWindow))
@@ -185,27 +201,22 @@ int main()
 		//Recibir eventos del usuario
 		glfwPollEvents();
 
+		//Se hace la comprobación del tiempo para cambiar de color
+		double tiempo_actual = glfwGetTime(); //Hago el uso de glfwGetTime ya que este no detiene la ejecución de la ventana como Sleep()
+		if (tiempo_actual - last_time >= 2.0) {
+			ROJO = (float)rand() / RAND_MAX;
+			VERDE = (float)rand() / RAND_MAX;
+			AZUL = (float)rand() / RAND_MAX;
+			last_time = tiempo_actual;
+		}
 		//Limpiar la ventana
-		if (color == 0) {
-			glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-			glClear(GL_COLOR_BUFFER_BIT);
-			color++;
-		}
-		else if (color == 1) {
-			glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
-			glClear(GL_COLOR_BUFFER_BIT);
-			color++;
-		}
-		else if (color == 2) {
-			glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
-			glClear(GL_COLOR_BUFFER_BIT);
-			color = 0;
-		}
-		Sleep(1500);
+		glClearColor(ROJO, VERDE, AZUL, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+
 		glUseProgram(shader);
 
 		glBindVertexArray(VAO);
-		glDrawArrays(GL_TRIANGLES,0,12);
+		glDrawArrays(GL_TRIANGLES,0,102);
 		glBindVertexArray(0);
 
 		glUseProgram(0);
