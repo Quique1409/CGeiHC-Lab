@@ -93,10 +93,10 @@ void CrearPiramideTriangular()
 
 	};
 	GLfloat vertices_piramide_triangular[] = {
-		-0.5f, -0.5f,0.0f,	//0
-		0.5f,-0.5f,0.0f,	//1
-		0.0f,0.5f, -0.25f,	//2
-		0.0f,-0.5f,-0.5f,	//3
+		-0.5f, -0.5f   ,  -0.433f,	//0
+		0.5f , -0.5f   ,  -0.433f,	//1
+		0.0f ,  0.316f ,  -0.15f,	//2
+		0.0f , -0.5f   ,  0.433f,	//3
 
 	};
 	Mesh* obj1 = new Mesh();
@@ -384,166 +384,353 @@ int main()
 		*/
 
 
-		//ejercicio de clase ////
-		//casa
-		model = glm::mat4(1.0f);
-		color = glm::vec3(1.0f, 0.0f, 0.0f); //RGB
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		//Opcional duplicar esta traslación inicial para posicionar en -Z a los objetos en el mismo punto
-		//model = glm::translate(model, glm::vec3(0.0f, 0.0f, -3.0f));
-		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));//FALSE ES PARA QUE NO SEA TRANSPUESTA
-		meshList[0]->RenderMesh();
+		///////////////////////////////// EJERCICIO DE PIRAMINX ////////////////////////////////////////////
 
-		//Techo
-		model = glm::mat4(1.0f);
-		color = glm::vec3(0.0f, 0.0f, 1.0f); //RGB
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		//Opcional duplicar esta traslación inicial para posicionar en -Z a los objetos en el mismo punto
-		//model = glm::translate(model, glm::vec3(0.0f, 0.0f, -3.0f));
-		model = glm::translate(model, glm::vec3(0.0f, 1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(1.3f, 1.0f, 1.3f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));//FALSE ES PARA QUE NO SEA TRANSPUESTA
-		meshList[4]->RenderMesh();
-
-		//Ventanas cuadradas
-		model = glm::mat4(1.0f);
-		color = glm::vec3(0.0f, 1.0f, 0.0f); //RGB
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		//Opcional duplicar esta traslación inicial para posicionar en -Z a los objetos en el mismo punto
-		//model = glm::translate(model, glm::vec3(0.0f, 0.0f, -3.0f));
-		model = glm::translate(model, glm::vec3(-0.2f, 0.2f, 0.37f));
-		model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));//FALSE ES PARA QUE NO SEA TRANSPUESTA
-		meshList[0]->RenderMesh();
-
-		model = glm::mat4(1.0f);
-		color = glm::vec3(0.0f, 1.0f, 0.0f); //RGB
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		//Opcional duplicar esta traslación inicial para posicionar en -Z a los objetos en el mismo punto
-		//model = glm::translate(model, glm::vec3(0.0f, 0.0f, -3.0f));
-		model = glm::translate(model, glm::vec3(0.2f, 0.2f, 0.37f));
-		model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));//FALSE ES PARA QUE NO SEA TRANSPUESTA
-		meshList[0]->RenderMesh();
-
-		//Puerta
-		model = glm::mat4(1.0f);
-		color = glm::vec3(0.0f, 1.0f, 0.0f); //RGB
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		//Opcional duplicar esta traslación inicial para posicionar en -Z a los objetos en el mismo punto
-		//model = glm::translate(model, glm::vec3(0.0f, 0.0f, -3.0f));
-		model = glm::translate(model, glm::vec3(0.0f, -0.3f, 0.37f));
-		model = glm::scale(model, glm::vec3(0.3f, 0.4f, 0.3f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));//FALSE ES PARA QUE NO SEA TRANSPUESTA
-		meshList[0]->RenderMesh();
-
-		//Arbol der
-		model = glm::mat4(1.0f);
-		color = glm::vec3(0.0f, 0.5f, 0.0f); //RGB
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		//Opcional duplicar esta traslación inicial para posicionar en -Z a los objetos en el mismo punto
-		//model = glm::translate(model, glm::vec3(0.0f, 0.0f, -3.0f));
-		model = glm::translate(model, glm::vec3(1.3f, 0.15f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.1f, 0.45f, 0.15f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));//FALSE ES PARA QUE NO SEA TRANSPUESTA
-		meshList[3]->RenderMeshGeometry();
-
-		model = glm::mat4(1.0f);
-		color = glm::vec3(0.478f, 0.255f, 0.067f); //RGB
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		//Opcional duplicar esta traslación inicial para posicionar en -Z a los objetos en el mismo punto
-		//model = glm::translate(model, glm::vec3(0.0f, 0.0f, -3.0f));
-		model = glm::translate(model, glm::vec3(1.3f, -0.3f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.1f, 0.4f, 0.1f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));//FALSE ES PARA QUE NO SEA TRANSPUESTA
-		meshList[2]->RenderMeshGeometry();
-
-		//Arbol izq
-		model = glm::mat4(1.0f);
-		color = glm::vec3(0.0f, 0.5f, 0.0f); //RGB
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		//Opcional duplicar esta traslación inicial para posicionar en -Z a los objetos en el mismo punto
-		//model = glm::translate(model, glm::vec3(0.0f, 0.0f, -3.0f));
-		model = glm::translate(model, glm::vec3(-1.3f, 0.15f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.1f, 0.45f, 0.15f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));//FALSE ES PARA QUE NO SEA TRANSPUESTA
-		meshList[3]->RenderMeshGeometry();
-
-		model = glm::mat4(1.0f);
-		color = glm::vec3(0.478f, 0.255f, 0.067f); //RGB
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		//Opcional duplicar esta traslación inicial para posicionar en -Z a los objetos en el mismo punto
-		//model = glm::translate(model, glm::vec3(0.0f, 0.0f, -3.0f));
-		model = glm::translate(model, glm::vec3(-1.3f, -0.3f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.1f, 0.4f, 0.1f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));//FALSE ES PARA QUE NO SEA TRANSPUESTA
-		meshList[2]->RenderMeshGeometry();
-
-		//ventana trasera
-		model = glm::mat4(1.0f);
-		color = glm::vec3(0.0f, 0.0f, 1.0f); //RGB
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		//Opcional duplicar esta traslación inicial para posicionar en -Z a los objetos en el mismo punto
-		//model = glm::translate(model, glm::vec3(0.0f, 0.0f, -3.0f));
-		model = glm::translate(model, glm::vec3(0.0f, 0.0f, -0.37f));
-		model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));//FALSE ES PARA QUE NO SEA TRANSPUESTA
-		sp.render();
-
-		//ventanas de lado der
-		model = glm::mat4(1.0f);
-		color = glm::vec3(0.0f, 1.0f, 0.0f); //RGB
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		//Opcional duplicar esta traslación inicial para posicionar en -Z a los objetos en el mismo punto
-		//model = glm::translate(model, glm::vec3(0.0f, 0.0f, -3.0f));
-		model = glm::translate(model, glm::vec3(0.36f, 0.2f, 0.2f));
-		model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));//FALSE ES PARA QUE NO SEA TRANSPUESTA
-		meshList[0]->RenderMesh();
-
-		model = glm::mat4(1.0f);
-		color = glm::vec3(0.0f, 1.0f, 0.0f); //RGB
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		//Opcional duplicar esta traslación inicial para posicionar en -Z a los objetos en el mismo punto
-		//model = glm::translate(model, glm::vec3(0.0f, 0.0f, -3.0f));
-		model = glm::translate(model, glm::vec3(0.36f, 0.2f, -0.2f));
-		model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));//FALSE ES PARA QUE NO SEA TRANSPUESTA
-		meshList[0]->RenderMesh();
-
-		//ventanas de lado izq
-		model = glm::mat4(1.0f);
-		color = glm::vec3(0.0f, 1.0f, 0.0f); //RGB
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		//Opcional duplicar esta traslación inicial para posicionar en -Z a los objetos en el mismo punto
-		//model = glm::translate(model, glm::vec3(0.0f, 0.0f, -3.0f));
-		model = glm::translate(model, glm::vec3(-0.36f, 0.2f, 0.2f));
-		model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));//FALSE ES PARA QUE NO SEA TRANSPUESTA
-		meshList[0]->RenderMesh();
-
-		model = glm::mat4(1.0f);
-		color = glm::vec3(0.0f, 1.0f, 0.0f); //RGB
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		//Opcional duplicar esta traslación inicial para posicionar en -Z a los objetos en el mismo punto
-		//model = glm::translate(model, glm::vec3(0.0f, 0.0f, -3.0f));
-		model = glm::translate(model, glm::vec3(-0.36f, 0.2f, -0.2f));
-		model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));//FALSE ES PARA QUE NO SEA TRANSPUESTA
-		meshList[0]->RenderMesh();
-
-		//Piso
+		//Piramide principal negro
 		model = glm::mat4(1.0f);
 		color = glm::vec3(0.0f, 0.0f, 0.0f); //RGB
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		//Opcional duplicar esta traslación inicial para posicionar en -Z a los objetos en el mismo punto
-		//model = glm::translate(model, glm::vec3(0.0f, 0.0f, -3.0f));
-		model = glm::translate(model, glm::vec3(0.0f, -1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(5.0f, 1.0f, 5.0f));
+		//model = glm::rotate(model, (float)glfwGetTime() * glm::radians(45.0f), glm::vec3(0.0f, 1.0f, 0.0f)); //Para que rote 
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(30.0f, 30.0f, 30.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));//FALSE ES PARA QUE NO SEA TRANSPUESTA
-		meshList[0]->RenderMesh();
+		meshList[1]->RenderMesh();
+
+		//Cara Amarrilla | Frontal
+		model = glm::mat4(1.0f);
+		color = glm::vec3(1.0f, 1.0f, 0.0f); //RGB
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		model = glm::translate(model, glm::vec3(1.0f, -10.0f, 8.0f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+		model = glm::mat4(1.0f);
+		color = glm::vec3(1.0f, 1.0f, 0.0f); //RGB
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color)); 
+		model = glm::translate(model, glm::vec3(5.5f, -10.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+		model = glm::mat4(1.0f);
+		color = glm::vec3(1.0f, 1.0f, 0.0f); //RGB
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color)); 
+		model = glm::translate(model, glm::vec3(10.0f, -10.0f, -8.0f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+		//Invertidos
+		model = glm::mat4(1.0f);
+		color = glm::vec3(1.0f, 1.0f, 0.0f); //RGB
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		model = glm::translate(model, glm::vec3(4.5f, -11.5f, 2.5f));
+		//Rota el objeto ya escalado sobre su propio eje.
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(14.0f, 6.0f, 8.0f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+		model = glm::mat4(1.0f);
+		color = glm::vec3(1.0f, 1.0f, 0.0f); //RGB
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		model = glm::translate(model, glm::vec3(9.5f, -11.5f, -5.2f));
+		//Rota el objeto ya escalado sobre su propio eje.
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(14.0f, 6.0f, 8.0f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+		//Segundo nivel
+		model = glm::mat4(1.0f);
+		color = glm::vec3(1.0f, 1.0f, 0.0f); //RGB
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		model = glm::translate(model, glm::vec3(1.1f, -3.0f, 2.5f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+		model = glm::mat4(1.0f);
+		color = glm::vec3(1.0f, 1.0f, 0.0f); //RGB
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color)); 
+		model = glm::translate(model, glm::vec3(5.8f, -3.0f, -5.0f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+		//Inversas segundo nivel
+		model = glm::mat4(1.0f);
+		color = glm::vec3(1.0f, 1.0f, 0.0f); //RGB
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		model = glm::translate(model, glm::vec3(4.8f, -4.5f, -2.8f));
+		//Rota el objeto ya escalado sobre su propio eje.
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(14.0f, 6.0f, 8.0f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+		//Tercer nivel
+		model = glm::mat4(1.0f);
+		color = glm::vec3(1.0f, 1.0f, 0.0f); //RGB
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		model = glm::translate(model, glm::vec3(1.4f, 4.0f, -2.5f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+
+		//cara izquierda Rojo
+		//Primer Nivel Izquierdo
+		model = glm::mat4(1.0f);
+		color = glm::vec3(1.0f, 0.0f, 0.0f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		model = glm::translate(model, glm::vec3(-1.0f, -10.0f, 8.0f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+		model = glm::mat4(1.0f);
+		color = glm::vec3(1.0f, 0.0f, 0.0f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		model = glm::translate(model, glm::vec3(-5.5f, -10.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+		model = glm::mat4(1.0f);
+		color = glm::vec3(1.0f, 0.0f, 0.0f); 
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		model = glm::translate(model, glm::vec3(-10.0f, -10.0f, -8.0f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+		//Invertidos Izquierdos
+		model = glm::mat4(1.0f);
+		color = glm::vec3(1.0f, 0.0f, 0.0f); 
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		model = glm::translate(model, glm::vec3(-4.5f, -11.5f, 3.0f));
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(-250.0f, 110.0f, 150.0f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+		model = glm::mat4(1.0f);
+		color = glm::vec3(1.0f, 0.0f, 0.0f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		model = glm::translate(model, glm::vec3(-9.5f, -11.5f, -5.2f));
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(-250.0f, 110.0f, 150.0f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+		//Segundo Nivel Izquierdo
+		model = glm::mat4(1.0f);
+		color = glm::vec3(1.0f, 0.0f, 0.0f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		model = glm::translate(model, glm::vec3(-1.1f, -3.0f, 2.5f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+		model = glm::mat4(1.0f);
+		color = glm::vec3(1.0f, 0.0f, 0.0f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		model = glm::translate(model, glm::vec3(-5.8f, -3.0f, -5.0f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+		//Inversa Segundo Nivel Izquierdo
+		model = glm::mat4(1.0f);
+		color = glm::vec3(1.0f, 0.0f, 0.0f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		model = glm::translate(model, glm::vec3(-4.8f, -4.5f, -2.8f));
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(-250.0f, 110.0f, 150.0f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+		//Tercer Nivel Izquierdo
+		model = glm::mat4(1.0f);
+		color = glm::vec3(1.0f, 0.0f, 0.0f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		model = glm::translate(model, glm::vec3(-1.4f, 4.0f, -2.5f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+		//Cara Derecha | Verde
+		//Primer Nivel Derecha
+		model = glm::mat4(1.0f);
+		color = glm::vec3(0.0f, 1.0f, 0.0f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		model = glm::translate(model, glm::vec3(-9.0f, -10.0f, -9.5f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+		model = glm::mat4(1.0f);
+		color = glm::vec3(0.0f, 1.0f, 0.0f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		model = glm::translate(model, glm::vec3(8.5f, -10.0f, -9.5f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+		model = glm::mat4(1.0f);
+		color = glm::vec3(0.0f, 1.0f, 0.0f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		model = glm::translate(model, glm::vec3(-0.3f, -10.0f, -9.5f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+		//Invertidos
+
+		model = glm::mat4(1.0f);
+		color = glm::vec3(0.0f, 1.0f, 0.0f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		model = glm::translate(model, glm::vec3(-4.65f, -12.5f, -10.5f));
+		// Rotación 180° para invertir el prisma
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, -18.0f, 50.0f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+		model = glm::mat4(1.0f);
+		color = glm::vec3(0.0f, 1.0f, 0.0f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		model = glm::translate(model, glm::vec3(4.15f, -12.5f, -10.5f));
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, -18.0f, 50.0f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+		//Segundo Nivel 
+		model = glm::mat4(1.0f);
+		color = glm::vec3(0.0f, 1.0f, 0.0f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		model = glm::translate(model, glm::vec3(4.0f, -3.0f, -7.0f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+		model = glm::mat4(1.0f);
+		color = glm::vec3(0.0f, 1.0f, 0.0f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		model = glm::translate(model, glm::vec3(-4.5f, -3.0f, -7.0f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+		model = glm::mat4(1.0f);
+		color = glm::vec3(0.0f, 1.0f, 0.0f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		model = glm::translate(model, glm::vec3(-0.25f, -5.5f, -8.25f));
+		// Rotación 180° para invertir el prisma
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, -18.0f, 50.0f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+		//Tercer Nivel
+		model = glm::mat4(1.0f);
+		color = glm::vec3(0.0f, 1.0f, 0.0f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		model = glm::translate(model, glm::vec3(-0.3f, 4.0f, -5.0f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+
+		//Base del prisma | Azul
+		// primer Nivel
+		model = glm::mat4(1.0f);
+		color = glm::vec3(0.0f, 0.0f, 1.0f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		model = glm::translate(model, glm::vec3(8.5f, -12.0f, -7.5f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+		model = glm::mat4(1.0f);
+		color = glm::vec3(0.0f, 0.0f, 1.0f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		model = glm::translate(model, glm::vec3(0.0f, -12.0f, -7.5f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+		model = glm::mat4(1.0f);
+		color = glm::vec3(0.0f, 0.0f, 1.0f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		model = glm::translate(model, glm::vec3(-8.5f, -12.0f, -7.5f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+		//Inversa
+		model = glm::mat4(1.0f);
+		color = glm::vec3(0.0f, 0.0f, 1.0f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		model = glm::translate(model, glm::vec3(4.25f, -12.0f, -7.5f));
+		// Rotación 180° para invertir el prisma
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+		model = glm::mat4(1.0f);
+		color = glm::vec3(0.0f, 0.0f, 1.0f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		model = glm::translate(model, glm::vec3(-4.25f, -12.0f, -7.5f));
+		// Rotación 180° para invertir el prisma
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+
+
+		//Segundo Nivel
+		model = glm::mat4(1.0f);
+		color = glm::vec3(0.0f, 0.0f, 1.0f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		model = glm::translate(model, glm::vec3(4.25f, -12.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+		model = glm::mat4(1.0f);
+		color = glm::vec3(0.0f, 0.0f, 1.0f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		model = glm::translate(model, glm::vec3(-4.25f, -12.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+		//Inversa
+		model = glm::mat4(1.0f);
+		color = glm::vec3(0.0f, 0.0f, 1.0f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		model = glm::translate(model, glm::vec3(0.0f, -12.0f, 0.0f));
+		// Rotación 180° para invertir el prisma
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
+
+
+		//Tercer Nivel
+		model = glm::mat4(1.0f);
+		color = glm::vec3(0.0f, 0.0f, 1.0f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		model = glm::translate(model, glm::vec3(0.0f, -12.0f, 7.0f));
+		model = glm::scale(model, glm::vec3(7.5f, 7.5f, 7.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		meshList[1]->RenderMesh();
 
 		glUseProgram(0);
 		mainWindow.swapBuffers();
