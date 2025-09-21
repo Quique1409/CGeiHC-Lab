@@ -346,7 +346,7 @@ int main()
 		camera.mouseControl(mainWindow.getXChange(), mainWindow.getYChange());
 
 		//Limpiar la ventana
-		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //Se agrega limpiar el buffer de profundidad
 		shaderList[0].useShader();
 		uniformModel = shaderList[0].getModelLocation();
@@ -354,215 +354,326 @@ int main()
 		uniformView = shaderList[0].getViewLocation();
 		uniformColor = shaderList[0].getColorLocation();
 
-			//--------- EJERCICIO 4 -------------
+		//		--------- Animal Robot 3D -------------
 
-		//CABINA
+		//Cuerpo Triceratops (Cubo)
+
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(0.0f, 5.5f, -4.0));
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0));
 		modelaux = model;
-		model = glm::scale(model, glm::vec3(5.0f, 3.0f, 3.0f));
+		model = glm::scale(model, glm::vec3(3.5f, 2.5f, 2.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(projection));
 		glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(camera.calculateViewMatrix()));
-		color = glm::vec3(0.1f, 0.3f, 0.2f);
+		color = glm::vec3(0.82f, 0.70f, 0.54f);
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		meshList[0]->RenderMesh();
 
-		//articulación 1
-		//model = glm::mat4(1.0);// NO SE VUELVE A USAR SE SUSTITUYE
-		model = modelaux;
-		model = glm::rotate(model, glm::radians(mainWindow.getarticulacion1()), glm::vec3(0.0f, 0.0f, 1.0f));
-
+		//Joroba
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(0.8f, 0.8f, 0.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		color = glm::vec3(1.0f, 0.0f, 1.0f);
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color)); //para cambiar el color del objetos
-		sp.render();
-
-		// Creando el brazo de una grúa
-		//articulacion1 hasta articulación5 sólo son puntos de rotación o articulación, en este caso no dibujaremos esferas que los representen
-
-	//primer brazo que conecta con la cabina
-
-	//para reiniciar la matriz de modelo con valor de la matriz identidad
-	//model = glm::mat4(1.0);
-	//rotación alrededor de la articulación que une con la cabina
-		model = glm::rotate(model, glm::radians(135.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-		model = glm::translate(model, glm::vec3(2.5f, 0.0f, 0.0f));
-		//Traslación inicial para posicionar en -Z a los objetos
-		//model = glm::translate(model, glm::vec3(0.0f, 0.0f, -4.0f));
-		//otras transformaciones para el objeto
-		modelaux = model;
-		model = glm::scale(model, glm::vec3(5.0f, 1.0f, 1.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//la línea de proyección solo se manda una vez a menos que en tiempo de ejecución
-		//se programe cambio entre proyección ortogonal y perspectiva
-		color = glm::vec3(0.0f, 1.0f, 0.0f);
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color)); //para cambiar el color del objetos
-		meshList[0]->RenderMesh(); //dibuja cubo y pirámide triangular
-		//meshList[3]->RenderMeshGeometry(); //dibuja las figuras geométricas cilindro, cono, pirámide base cuadrangular
-		//sp.render(); //dibuja esfera
-
-		//SEGUNDA ARTICULACIÓN
-		model = modelaux;
-		model = glm::translate(model, glm::vec3(2.5f, 0.0f, 0.0f));
-		model = glm::rotate(model, glm::radians(mainWindow.getarticulacion2()), glm::vec3(0.0f, 0.0f, 1.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		color = glm::vec3(1.0f, 0.0f, 1.0f);
+		color = glm::vec3(0.54f, 0.27f, 0.07f);
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		sp.render();
-
-		//segundo brazo
-
-		//para reiniciar la matriz de modelo con valor de la matriz identidad
-		//Comentar y se modifica para agregar la jerarquia:
-		//usar una matriz temporal o auxiliar
-		//model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(0.f, -2.5f, 0.0f));
-		//Traslación inicial para posicionar en -Z a los objetos
-		//model = glm::translate(model, glm::vec3(0.0f, 0.0f, -4.0f));
-		//otras transformaciones para el objeto
-		modelaux = model;
-		model = glm::scale(model, glm::vec3(1.0f, 5.0f, 1.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//la línea de proyección solo se manda una vez a menos que en tiempo de ejecución
-		//se programe cambio entre proyección ortogonal y perspectiva
-		color = glm::vec3(0.0f, 1.0f, 0.0f);
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color)); //para cambiar el color del objetos
-		meshList[0]->RenderMesh(); //dibuja cubo y pirámide triangular
-
-		//ARTICULACION 3
-		model = modelaux;
-		model = glm::translate(model, glm::vec3(0.0f, -2.5f, 0.0f));
-		model = glm::rotate(model, glm::radians(mainWindow.getarticulacion3()), glm::vec3(0.0f, 0.0f, 1.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		color = glm::vec3(1.0f, 0.0f, 1.0f);
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		sp.render();
-
-		//BRAZO 3
-		model = glm::rotate(model, glm::radians(115.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-		model = glm::translate(model, glm::vec3(0.f, -2.5f, 0.0f));
-		modelaux = model;
-		model = glm::scale(model, glm::vec3(1.0f, 5.0f, 1.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		color = glm::vec3(0.0f, 1.0f, 0.0f);
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		meshList[0]->RenderMesh();
-
-		//ARTICULACION 4
-		model = modelaux;
-		model = glm::translate(model, glm::vec3(0.0f, -2.5f, 0.0f));
-		model = glm::rotate(model, glm::radians(mainWindow.getarticulacion4()), glm::vec3(1.0f, 0.0f, 0.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		sp.render();
-
-		//CANASTA
-		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f));
-		modelaux = model;
-		model = glm::scale(model, glm::vec3(3.0f, 3.0f, 3.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(projection));
-		glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(camera.calculateViewMatrix()));
-		glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(camera.calculateViewMatrix()));
-		color = glm::vec3(0.0f, 0.0f, 1.0f);
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		meshList[0]->RenderMesh();
-
-		//EJERCICIO:  EL BRAZO Y DIBUJAR TAMBIEN LA CANASTA
-
-		//dESPUES DE LA CANASTA, REGRESAR A LA CABINA
-		//model = modelaux2; ----este se usa para regresar la cabina.
+		meshList[2]->RenderMeshGeometry();
 
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(0.0f, 3.5f, -4.0f)); // Posición base del chasis
+		model = glm::translate(model, glm::vec3(0.0f, 1.2f, 0.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		color = glm::vec3(0.54f, 0.27f, 0.07f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		meshList[2]->RenderMeshGeometry();
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-0.8f, 0.8f, 0.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		color = glm::vec3(0.54f, 0.27f, 0.07f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		meshList[2]->RenderMeshGeometry();
+
+		//Parte de la cola
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-2.0f, 0.0f, 0.0f));
+		//model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(0.5f, 1.5f, 1.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		color = glm::vec3(0.82f, 0.70f, 0.54f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		meshList[0]->RenderMesh();
+
+		//Primer articulación (Para la cola)
+		model = modelaux;
+		model = glm::translate(model, glm::vec3(-2.2f, 0.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(mainWindow.getarticulacion1()), glm::vec3(1.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		color = glm::vec3(0.0f, 0.0f, 0.0f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		sp.render();
+
+		//Cola (Cono)
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::translate(model, glm::vec3(0.0f, 3.0f, 0.0f));
+		modelaux = model;
+		model = glm::scale(model, glm::vec3(0.5f, 5.0f, 0.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		color = glm::vec3(0.82f, 0.70f, 0.54f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		meshList[3]->RenderMeshGeometry();
+
+		//Se vuelve al inicio de la matriz para comenzar con las patas
+		model = glm::mat4(1.0);
 		glm::mat4 modelaux2 = model;
 		glm::mat4 modelaux3 = model;
 		glm::mat4 modelaux4 = model;
 		glm::mat4 modelaux5 = model;
-		model = glm::scale(model, glm::vec3(5.0f, 2.5f, 3.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		color = glm::vec3(0.5f, 0.8f, 1.0f);
-		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		meshList[4]->RenderMeshGeometry(); // Base triangular/cuadrangular
 
-
-		// ----Rueda izq trasera y articulacion 5 ---
+		//Articulación pata der frontal
 		model = modelaux2;
-		model = glm::translate(model, glm::vec3(2.5f, -1.5f, 2.2f)); // Posición articulación
-		model = glm::rotate(model, glm::radians(mainWindow.getarticulacion5()), glm::vec3(0.0f, 0.0f, 1.0f)); // Rotar para girar la rueda
-		model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
+		model = glm::translate(model, glm::vec3(1.2f, -1.0f, 0.7f));
+		model = glm::rotate(model, glm::radians(mainWindow.getarticulacion2()), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 0.4f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		color = glm::vec3(1.0f, 0.0f, 1.0f);
+		color = glm::vec3(0.0f, 0.0f, 0.0f);
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		sp.render();
 
-		//Rueda
+		//Pierna y pata Der Frontal
 		modelaux2 = model;
-		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f)); // Para que el cilindro quede vertical
-		model = glm::scale(model, glm::vec3(2.8f, 2.8f, 2.8f)); // Escala de la rueda (ancho, grosor, radio)
+		model = glm::translate(model, glm::vec3(0.0f, -1.0f, 0.0f));
+		//model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(2.5f, 6.0f, 2.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		color = glm::vec3(0.2f, 0.2f, 0.2f); // Color de la llanta
+		color = glm::vec3(0.82f, 0.70f, 0.54f);
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		meshList[2]->RenderMeshGeometry();
+		meshList[0]->RenderMesh();
+
+		//Articulacióin del pie
+		model = modelaux2;
+		model = glm::translate(model, glm::vec3(0.0f, -4.0f, 0.0f));
+		//model = glm::translate(model, glm::vec3(1.2f, -1.0f, 0.7f));
+		model = glm::rotate(model, glm::radians(mainWindow.getarticulacion3()), glm::vec3(0.0f, 0.0f, 1.0f));
+		//model = glm::scale(model, glm::vec3(0.4f, 0.4f, 0.4f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		color = glm::vec3(0.0f, 0.0f, 0.0f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		sp.render();
+
+		//Pata Der Frontal
+		modelaux2 = model;
+		model = glm::translate(model, glm::vec3(0.5f, -1.0f, 0.0f));
+		//model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(4.0f, 1.0f, 2.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		color = glm::vec3(0.54f, 0.27f, 0.07f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		meshList[0]->RenderMesh();
 
 
-		// ----Rueda derecha trasera y articulacion 6 ---
+		// ---------Articulación pata izq frontal----------------
 		model = modelaux3;
-		model = glm::translate(model, glm::vec3(2.5f, -1.5f, -2.2f)); // Posición articulación
-		model = glm::rotate(model, glm::radians(mainWindow.getarticulacion6()), glm::vec3(0.0f, 0.0f, 1.0f)); // Rotar para girar la rueda
-		model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
+		model = glm::translate(model, glm::vec3(1.2f, -1.0f, -0.7f));
+		model = glm::rotate(model, glm::radians(mainWindow.getarticulacion4()), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 0.4f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		color = glm::vec3(1.0f, 0.0f, 1.0f);
+		color = glm::vec3(0.0f, 0.0f, 0.0f);
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		sp.render();
 
-		//Rueda
-		modelaux2 = model;
-		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f)); // Para que el cilindro quede vertical
-		model = glm::scale(model, glm::vec3(2.8f, 2.8f, 2.8f)); // Escala de la rueda (ancho, grosor, radio)
+		//Pierna y pata Izq Frontal
+		modelaux3 = model;
+		model = glm::translate(model, glm::vec3(0.0f, -1.0f, 0.0f));
+		//model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(2.5f, 6.0f, 2.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		color = glm::vec3(0.2f, 0.2f, 0.2f); // Color de la llanta
+		color = glm::vec3(0.82f, 0.70f, 0.54f);
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		meshList[2]->RenderMeshGeometry();
+		meshList[0]->RenderMesh();
 
-		// ----Rueda izq frontal y articulacion 7 ---
+		//Articulacióin del pie
+		model = modelaux3;
+		model = glm::translate(model, glm::vec3(0.0f, -4.0f, 0.0f));
+		//model = glm::translate(model, glm::vec3(1.2f, -1.0f, 0.7f));
+		model = glm::rotate(model, glm::radians(mainWindow.getarticulacion5()), glm::vec3(0.0f, 0.0f, 1.0f));
+		//model = glm::scale(model, glm::vec3(0.4f, 0.4f, 0.4f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		color = glm::vec3(0.0f, 0.0f, 0.0f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		sp.render();
+
+		//Pata Izq Frontal
+		modelaux3 = model;
+		model = glm::translate(model, glm::vec3(0.5f, -1.0f, 0.0f));
+		//model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(4.0f, 1.0f, 2.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		color = glm::vec3(0.54f, 0.27f, 0.07f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		meshList[0]->RenderMesh();
+
+
+
+		//---------Articulación pata der Trasera----------------
 		model = modelaux4;
-		model = glm::translate(model, glm::vec3(-2.5f, -1.5f, 2.2f)); // Posición articulación
-		model = glm::rotate(model, glm::radians(mainWindow.getarticulacion7()), glm::vec3(0.0f, 0.0f, 1.0f)); // Rotar para girar la rueda
-		model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
+		model = glm::translate(model, glm::vec3(-1.2f, -1.0f, 0.7f));
+		model = glm::rotate(model, glm::radians(mainWindow.getarticulacion6()), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 0.4f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		color = glm::vec3(1.0f, 0.0f, 1.0f);
+		color = glm::vec3(0.0f, 0.0f, 0.0f);
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		sp.render();
 
-		//Rueda
-		modelaux2 = model;
-		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f)); // Para que el cilindro quede vertical
-		model = glm::scale(model, glm::vec3(2.8f, 2.8f, 2.8f)); // Escala de la rueda (ancho, grosor, radio)
+		//Pierna y pata Der Trasera
+		modelaux4 = model;
+		model = glm::translate(model, glm::vec3(0.0f, -1.0f, 0.0f));
+		//model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(2.5f, 6.0f, 2.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		color = glm::vec3(0.2f, 0.2f, 0.2f); // Color de la llanta
+		color = glm::vec3(0.82f, 0.70f, 0.54f);
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
-		meshList[2]->RenderMeshGeometry();
+		meshList[0]->RenderMesh();
+
+		//Articulacióin del pie
+		model = modelaux4;
+		model = glm::translate(model, glm::vec3(0.0f, -4.0f, 0.0f));
+		//model = glm::translate(model, glm::vec3(1.2f, -1.0f, 0.7f));
+		model = glm::rotate(model, glm::radians(mainWindow.getarticulacion7()), glm::vec3(0.0f, 0.0f, 1.0f));
+		//model = glm::scale(model, glm::vec3(0.4f, 0.4f, 0.4f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		color = glm::vec3(0.0f, 0.0f, 0.0f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		sp.render();
+
+		//Pata Der Trasera
+		modelaux4 = model;
+		model = glm::translate(model, glm::vec3(0.5f, -1.0f, 0.0f));
+		//model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(4.0f, 1.0f, 2.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		color = glm::vec3(0.54f, 0.27f, 0.07f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		meshList[0]->RenderMesh();
 
 
-		// ----Rueda derecha frontal y articulacion 8 ---
+		// ---------Articulación pata izq Trasera
 		model = modelaux5;
-		model = glm::translate(model, glm::vec3(-2.5f, -1.5f, -2.2f)); // Posición articulación
-		model = glm::rotate(model, glm::radians(mainWindow.getarticulacion8()), glm::vec3(0.0f, 0.0f, 1.0f)); // Rotar para girar la rueda
-		model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
+		model = glm::translate(model, glm::vec3(-1.2f, -1.0f, -0.7f));
+		model = glm::rotate(model, glm::radians(mainWindow.getarticulacion8()), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 0.4f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		color = glm::vec3(1.0f, 0.0f, 1.0f);
+		color = glm::vec3(0.0f, 0.0f, 0.0f);
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		sp.render();
 
-		//Rueda
-		modelaux2 = model;
-		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f)); // Para que el cilindro quede vertical
-		model = glm::scale(model, glm::vec3(2.8f, 2.8f, 2.8f)); // Escala de la rueda (ancho, grosor, radio)
+		//Pierna y pata Izq Trasera
+		modelaux5 = model;
+		model = glm::translate(model, glm::vec3(0.0f, -1.0f, 0.0f));
+		//model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(2.5f, 6.0f, 2.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		color = glm::vec3(0.2f, 0.2f, 0.2f); // Color de la llanta
+		color = glm::vec3(0.82f, 0.70f, 0.54f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		meshList[0]->RenderMesh();
+
+		//Articulacióin del pie
+		model = modelaux5;
+		model = glm::translate(model, glm::vec3(0.0f, -4.0f, 0.0f));
+		//model = glm::translate(model, glm::vec3(1.2f, -1.0f, 0.7f));
+		model = glm::rotate(model, glm::radians(mainWindow.getarticulacion9()), glm::vec3(0.0f, 0.0f, 1.0f));
+		//model = glm::scale(model, glm::vec3(0.4f, 0.4f, 0.4f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		color = glm::vec3(0.0f, 0.0f, 0.0f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		sp.render();
+
+		//Pata Izq Trasera
+		modelaux5 = model;
+		model = glm::translate(model, glm::vec3(0.5f, -1.0f, 0.0f));
+		//model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(4.0f, 1.0f, 2.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		color = glm::vec3(0.54f, 0.27f, 0.07f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		meshList[0]->RenderMesh();
+
+		// ----------- cabeza del Dinosaurio ----------------
+
+		//Se vuelve al origen
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(2.0f, 0.5f, 0.0f));
+		//model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(0.5f, 1.3f, 1.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		color = glm::vec3(0.82f, 0.70f, 0.54f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		meshList[0]->RenderMesh();
+
+		//Se hace la cresta
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(2.5f, 0.5f, 0.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(1.5f, 0.5f, 1.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		color = glm::vec3(0.54f, 0.27f, 0.07f);
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		meshList[2]->RenderMeshGeometry();
+
+		//Boca
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(3.75f, 0.1f, 0.0f));
+		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(1.5f, 2.0f, 1.8f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		color = glm::vec3(0.82f, 0.70f, 0.54f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		meshList[4]->RenderMesh();
+
+		//Cuernos
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(3.4f, 0.8f, 0.6f));
+		model = glm::rotate(model, glm::radians(-65.0f), glm::vec3(0.0f, 1.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(0.15f, 1.0f, 0.15f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		color = glm::vec3(0.0f, 0.0f, 0.0f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		meshList[3]->RenderMeshGeometry();
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(3.4f, 0.8f, -0.6f));
+		model = glm::rotate(model, glm::radians(-65.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(0.15f, 1.0f, 0.15f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		color = glm::vec3(0.0f, 0.0f, 0.0f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		meshList[3]->RenderMeshGeometry();
+
+
+		//Ojos
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(3.8f, 0.4f, 0.4f));
+		//model = glm::rotate(model, glm::radians(-65.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		color = glm::vec3(0.0f, 0.0f, 0.0f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		meshList[0]->RenderMesh();
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(3.8f, 0.4f, -0.4f));
+		//model = glm::rotate(model, glm::radians(-65.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		color = glm::vec3(0.0f, 0.0f, 0.0f);
+		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
+		meshList[0]->RenderMesh();
+		
+
 
 
 

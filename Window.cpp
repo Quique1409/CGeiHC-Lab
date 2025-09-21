@@ -162,6 +162,10 @@ void Window::ManejaTeclado(GLFWwindow* window, int key, int code, int action, in
 	{
 		theWindow->articulacion8 += 10.0;
 	}
+	if (key == GLFW_KEY_I)
+	{
+		theWindow->articulacion9 += 10.0;
+	}
 
 
 	if (key == GLFW_KEY_D && action == GLFW_PRESS)
